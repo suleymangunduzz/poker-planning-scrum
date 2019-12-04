@@ -1,0 +1,12 @@
+.info-form {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+  margin: 20px 0;
+
+  &__label {
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    margin: 10px 0;
+  }
+}

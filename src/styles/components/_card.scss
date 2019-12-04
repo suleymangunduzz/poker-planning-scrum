@@ -1,0 +1,13 @@
+.card {
+  color: blue;
+  border: 1px red solid;
+  min-height: 50px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: red;
+  }
+}

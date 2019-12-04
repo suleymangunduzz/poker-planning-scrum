@@ -1,0 +1,15 @@
+.story {
+  &__row {
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__cards {
+    display: flex;
+  }
+}

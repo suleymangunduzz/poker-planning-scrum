@@ -1,0 +1,10 @@
+@import './components/card';
+@import './components/story';
+@import './components/app';
+@import './components/developer';
+@import './components/storyInfoForm';
+
+body {
+  display: flex;
+  justify-content: center;
+}
