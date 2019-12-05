@@ -11,7 +11,7 @@ export const addPointToStory = () => async (dispatch, getState) => {
       type: ADD_POINT_TO_STORY_REQUEST
     });
 
-    let res = await axios.get('http://localhost:3005/data');
+    let res = await axios.get('http://localhost:3005/sprint');
 
     dispatch({
       type: ADD_POINT_TO_STORY_SUCCESS,

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import MasterPage from './MasterPage';
 import DeveloperPage from './DeveloperPage';
 import AddStoryScreen from './AddStoryScreen';
 import {
-  addPointToStory,
-  getStories
+  createSprint
 } from '../store/actions';
 import {
   MASTER,
@@ -28,16 +29,17 @@ class HomePageLayout extends Component {
     const {
       storyReducer,
       match: { params: { pageName } },
-      getStories
+      createSprint,
+      history
     } = this.props;
 
     switch (pageName) {
       case MASTER:
-        return <MasterPage getStories={ getStories } storyData={ storyReducer } />;
+        return <MasterPage />;
       case DEVELOPER:
         return <DeveloperPage storyData={ storyReducer } />;
       case HOME:
-        return <AddStoryScreen />;
+        return <AddStoryScreen createSprint={ createSprint } history={ history } />;
       default:
         break;
     }
@@ -56,11 +58,14 @@ class HomePageLayout extends Component {
   }
 };
 
+HomePageLayout.propTypes = {
+  createSprint: PropTypes.func,
+};
+
 const mapStateToProps = state => ({
   storyReducer: state.storyReducer
 });
 
 export default connect(mapStateToProps, {
-    addPointToStory,
-    getStories
+    createSprint
 })(HomePageLayout);
