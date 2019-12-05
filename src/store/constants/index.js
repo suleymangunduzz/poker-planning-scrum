@@ -5,3 +5,7 @@ export const ADD_POINT_TO_STORY_FAILURE = 'ADD_POINT_TO_STORY_REQUEST';
 export const GET_STORIES_REQUEST = 'GET_STORIES_REQUEST';
 export const GET_STORIES_SUCCESS = 'GET_STORIES_SUCCESS';
 export const GET_STORIES_FAILURE = 'GET_STORIES_FAILURE';
+
+export const MASTER = 'poker-planning-as-scrum-master';
+export const DEVELOPER = 'poker-planning-as-developer';
+export const HOME = 'poker-planning-add-story-list';

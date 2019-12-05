@@ -1,10 +1,6 @@
-@import './components/card';
-@import './components/story';
-@import './components/app';
 @import './components/developer';
-@import './components/storyInfoForm';
-
-body {
-  display: flex;
-  justify-content: center;
-}
+@import './components/add-story';
+@import './components/story-list';
+@import './components/story-panel';
+@import './components/master';
+@import './components/home-page';

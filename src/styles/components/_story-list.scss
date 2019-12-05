@@ -1,0 +1,27 @@
+.story-list {
+  &__content {
+    width: 450px;
+    border: 1px solid;
+  }
+
+  &__title {
+    line-height: 30px;
+    margin-left: 5px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+    line-height: 25px;
+    background-color: lightgray;
+
+    &--header {
+      background-color: darkgray;
+    }
+  }
+
+  &__row-title {
+    border-left: 1px solid;
+    padding-left: 3px;
+  }
+}

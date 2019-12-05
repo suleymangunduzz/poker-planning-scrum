@@ -1,0 +1,46 @@
+.story-panel {
+  margin-left: 20px;
+
+  &__content {
+    max-width: 350px;
+    border: 1px solid;
+    min-height: 400px;
+    padding: 65px 10px;
+  }
+
+  &__title {
+    line-height: 30px;
+    margin-left: 5px;
+  }
+
+  &__boxes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__message {
+    line-height: 30px;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+
+.story-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border: 3px solid;
+  margin: 10px;
+
+  &--selected {
+
+  }
+
+  &__point {
+    font-weight: bold;
+  }
+}

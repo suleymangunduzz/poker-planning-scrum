@@ -1,0 +1,23 @@
+.add-story {
+  &__container {
+    min-height: 400px;
+  }
+
+  &__inputs {
+    height: 80px;
+    display: grid;
+    grid-template-columns: 2fr 4fr 0.5fr 2fr 4fr;
+    align-content: center;
+  }
+
+  &__info-message {
+    line-height: 30px;
+  }
+
+  &__text-area {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 15px;
+  }
+
+}

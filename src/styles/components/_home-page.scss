@@ -1,0 +1,22 @@
+.home-page {
+  &__info {
+    display: flex;
+    min-height: 100px;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    margin-bottom: 25px;
+  }
+
+  &__logo {
+    font-size: 35px;
+    border: 3px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--url {
+      border: none;
+      font-size: 20px;
+    }
+  }
+}

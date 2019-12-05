@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import StoryInfoForm from './StoryInfoForm';
-import Story from './Story';
+import StoryList from './StoryList';
+import ActiveStory from './ActiveStory';
 
 class MasterPage extends Component {
   constructor (props) {
@@ -11,6 +11,10 @@ class MasterPage extends Component {
       title: '',
       description: ''
     };
+  }
+
+  componentDidMount () {
+    this.props.getStories();
   }
 
   handleChange = (event) => {
@@ -30,33 +34,18 @@ class MasterPage extends Component {
   render () {
     const { storyData } = this.props;
 
-    const renderStories = () => {
-      return storyData.data.map((story, index) => <Story
-        key={ index }
-        title={ story.title }
-        description={ story.description }
-        size={ story.size }
-        showCards={ false }
-        />)
-    };
-
     return (
-      <>
-        <StoryInfoForm
-          title={ this.state.title }
-          description={ this.state.description }
-          handleChange={ this.handleChange }
-          handleSubmit={ this.handleSubmit }/>
-
-          { renderStories() }
-      </>
+      <div className="master__content">
+        <StoryList storyList={ storyData } />
+        <ActiveStory />
+      </div>
     );
   }
-};
+}
 
 MasterPage.propTypes = {
   storyData: PropTypes.object,
-  point: PropTypes.number
+  getStories: PropTypes.func
 }
 
 export default MasterPage;

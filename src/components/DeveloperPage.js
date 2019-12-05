@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Story from './Story';
 
 class DeveloperPage extends Component {
   constructor (props) {
@@ -18,13 +17,7 @@ class DeveloperPage extends Component {
     const { storyData } = this.props;
 
     const renderStories = () => {
-      return storyData.data.map((story, index) => <Story
-        key={ index }
-        title={ story.title }
-        description={ story.description }
-        size={ story.size }
-        showCards
-        />)
+      return null;
     };
 
     return (
