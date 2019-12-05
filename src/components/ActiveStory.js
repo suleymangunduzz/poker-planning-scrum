@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 const ActiveStory = ({ voteStory }) => {
-  const [isSelected, setSelectedState] = useState(false);
+  const [selectedVote, setSelectedVote] = useState(null);
   const [messsage, setMessage] = useState('');
-
-  const boxClassNames = classnames({
-    "story-box": true,
-    "story-box--selected": isSelected
-  });
 
   const renderBoxes = () => {
     return [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 134, '?'].map((point, index) => {
+      const boxClassNames = classnames({
+        "story-box": true,
+        "story-box--selected": point === selectedVote
+      });
+
       return (
         <div className={ boxClassNames } key={ index } onClick={ () => {
-          setSelectedState(!isSelected);
+          setSelectedVote(point);
+          voteStory(point);
           setMessage(point + ' Voted');
           }}>
           { point }
@@ -38,7 +39,7 @@ const ActiveStory = ({ voteStory }) => {
 };
 
 ActiveStory.propTypes = {
-  voteStory: PropTypes.bool
+  voteStory: PropTypes.func
 };
 
 export default ActiveStory;

@@ -1,21 +1,25 @@
 import axios from 'axios';
+
+import { getSprint } from '../actions/sprintActions';
 import {
   GET_STORIES_REQUEST,
   GET_STORIES_SUCCESS,
   GET_STORIES_FAILURE
 } from '../constants';
 
-export const getStories = () => async dispatch => {
+export const getStories = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: GET_STORIES_REQUEST
     });
 
-    let res = await axios.get('http://localhost:3005/sprint');
+    await dispatch(getSprint());
+
+    const stories = getState().sprintReducer.data.stories;
 
     dispatch({
       type: GET_STORIES_SUCCESS,
-      payload: res.data.stories
+      payload: stories
     });
   } catch (e) {
     dispatch({

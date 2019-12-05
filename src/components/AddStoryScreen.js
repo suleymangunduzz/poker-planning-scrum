@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
 
 import { MASTER } from '../store/constants';
 class AddStoryScreen extends Component {
@@ -19,7 +18,7 @@ class AddStoryScreen extends Component {
     const { target: { id, value } } = event;
 
     this.setState({
-      [id]: id === "voters" ? value.replace(/[^0-9]/g, '') : value
+      [id]: id === "voters" ? value.replace(/(^0)|(\D)/g, '') : value
     });
   }
 

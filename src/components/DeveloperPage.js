@@ -14,8 +14,6 @@ class DeveloperPage extends Component {
   }
 
   render () {
-    const { storyData } = this.props;
-
     const renderStories = () => {
       return null;
     };

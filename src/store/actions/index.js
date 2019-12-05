@@ -1,3 +1,3 @@
-export * from './pointActions';
+export * from './voteActions';
 export * from './storyActions';
 export * from './sprintActions';

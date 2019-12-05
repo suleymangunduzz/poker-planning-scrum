@@ -6,7 +6,8 @@ import MasterPage from './MasterPage';
 import DeveloperPage from './DeveloperPage';
 import AddStoryScreen from './AddStoryScreen';
 import {
-  createSprint
+  createSprint,
+  voteStory
 } from '../store/actions';
 import {
   MASTER,
@@ -30,14 +31,15 @@ class HomePageLayout extends Component {
       storyReducer,
       match: { params: { pageName } },
       createSprint,
-      history
+      history,
+      voteStory
     } = this.props;
 
     switch (pageName) {
       case MASTER:
-        return <MasterPage />;
+        return <MasterPage voteStory={voteStory} />;
       case DEVELOPER:
-        return <DeveloperPage storyData={ storyReducer } />;
+        return <DeveloperPage storyData={ storyReducer } voteStory={voteStory} />;
       case HOME:
         return <AddStoryScreen createSprint={ createSprint } history={ history } />;
       default:
@@ -60,6 +62,7 @@ class HomePageLayout extends Component {
 
 HomePageLayout.propTypes = {
   createSprint: PropTypes.func,
+  voteStory: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -67,5 +70,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-    createSprint
+    createSprint,
+    voteStory
 })(HomePageLayout);
