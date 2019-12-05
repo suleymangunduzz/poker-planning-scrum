@@ -1,0 +1,35 @@
+.master-panel {
+  margin-left: 20px;
+
+  &__title {
+    line-height: 30px;
+    margin-left: 5px;
+  }
+
+  &__content {
+    max-width: 350px;
+    border: 1px solid;
+    min-height: 400px;
+    padding: 65px 10px;
+  }
+
+  &__row-container {
+    padding: 10px;
+  }
+
+  &__row {
+    font-weight: bold; 
+    display: grid;
+    line-height: 30px;
+
+    &--divided {
+      grid-template-columns: 3fr 1fr 5fr;
+    }
+  }
+
+  &__message,
+  &__button {
+    line-height: 30px;
+    margin-top: 10px;
+  }
+}

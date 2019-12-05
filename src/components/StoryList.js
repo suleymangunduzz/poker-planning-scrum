@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getStories } from '../store/actions';
 import { connect } from 'react-redux';
+
+import { getStories } from '../store/actions';
 
 class StoryList extends Component {
 

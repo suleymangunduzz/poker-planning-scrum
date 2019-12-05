@@ -3,7 +3,7 @@ import HomePageLayout from './components/HomePageLayout';
 
 export default [
   {
-    path: '/:pageName',
+    path: '/:pageName?',
     exact: true,
     render: props => <HomePageLayout { ...props } />
   }

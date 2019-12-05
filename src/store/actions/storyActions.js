@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { getSprint } from '../actions/sprintActions';
 import {
   GET_STORIES_REQUEST,

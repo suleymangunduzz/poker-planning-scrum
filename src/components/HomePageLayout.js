@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import MasterPage from './MasterPage';
 import DeveloperPage from './DeveloperPage';
@@ -43,7 +44,19 @@ class HomePageLayout extends Component {
       case HOME:
         return <AddStoryScreen createSprint={ createSprint } history={ history } />;
       default:
-        break;
+        return (
+          <>
+            <NavLink to={ `/${DEVELOPER}` } className="home-page__link">
+              I am a Developer !
+            </NavLink>
+            <NavLink to={ `/${MASTER}` } className="home-page__link">
+              I am a Scrum Master !
+            </NavLink>
+            <NavLink to={ `/${HOME}` } className="home-page__link">
+              I am the Story Creator !
+            </NavLink>
+          </>
+        );
     }
   };
 

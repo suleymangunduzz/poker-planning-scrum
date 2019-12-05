@@ -1,10 +1,18 @@
 .home-page {
+  text-align: center;
+
   &__info {
     display: flex;
     min-height: 100px;
     display: grid;
     grid-template-columns: 2fr 8fr;
     margin-bottom: 25px;
+  }
+
+  &__link {
+    text-decoration: unset;
+    color: black;
+    margin: 20px;
   }
 
   &__logo {
