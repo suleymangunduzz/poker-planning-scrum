@@ -7,7 +7,9 @@ import UsersPage from './UsersPage';
 import AddStoryScreen from './AddStoryScreen';
 import {
   createSprint,
-  voteStory
+  voteStory,
+  getSprint,
+  getVotes
 } from '../store/actions';
 import {
   MASTER,
@@ -16,6 +18,12 @@ import {
 } from '../store/constants';
 
 class HomePageLayout extends Component {
+
+  componentDidMount () {
+    this.props.getVotes();
+    this.props.getSprint();
+  }
+
   renderUrlArea = () => {
     const { match: { params: { pageName } } } = this.props;
 
@@ -32,16 +40,25 @@ class HomePageLayout extends Component {
       match: { params: { pageName } },
       createSprint,
       history,
-      voteStory
+      voteStory,
+      stories
     } = this.props;
 
     const stillVoting = (data && data.length < voters) || !sprintName;
 
+    const userProps = {
+      stories,
+      voteStory,
+      stillVoting,
+      sprintName,
+      votes: data
+    };
+
     switch (pageName) {
       case MASTER:
-        return <UsersPage voteStory={ voteStory } stillVoting={ stillVoting }  sprintName={ sprintName } master />;
+        return <UsersPage { ...userProps } master />;
       case DEVELOPER:
-        return <UsersPage voteStory={ voteStory } stillVoting={ stillVoting } sprintName={ sprintName }/>;
+        return <UsersPage { ...userProps } />;
       case HOME:
         return <AddStoryScreen createSprint={ createSprint } history={ history } />;
       default:
@@ -79,18 +96,24 @@ class HomePageLayout extends Component {
 HomePageLayout.propTypes = {
   createSprint: PropTypes.func,
   voteStory: PropTypes.func,
+  getSprint: PropTypes.func,
+  getVotes: PropTypes.func,
   sprintName: PropTypes.string,
   voters: PropTypes.number,
-  voteReducer: PropTypes.object
+  voteReducer: PropTypes.object,
+  stories: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   voteReducer: state.voteReducer,
   voters: state.sprintReducer.data.voters,
-  sprintName: state.sprintReducer.data.name
+  sprintName: state.sprintReducer.data.name,
+  stories: state.sprintReducer.data.stories
 });
 
 export default connect(mapStateToProps, {
     createSprint,
-    voteStory
+    voteStory,
+    getSprint,
+    getVotes
 })(HomePageLayout);

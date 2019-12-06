@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 
 import {
   getVotes,
-  getSprint
+  getSprint,
+  finishStory
 } from '../store/actions';
+import { STORY_STATUS } from '../store/constants';
 
 class MasterPanel extends Component {
 
@@ -32,8 +34,12 @@ class MasterPanel extends Component {
   }
 
   handleSubmit = () => {
+    const { finalScore } = this.state;
+    const { finishStory } = this.props;
 
-    // TODO: finalize the score of active story
+    if (finalScore) {
+      finishStory(finalScore);
+    }
 
     this.setState({
       showFinalInput: true
@@ -59,7 +65,8 @@ class MasterPanel extends Component {
 
   render () {
     const { finalScore, showFinalInput } = this.state;
-    const { voteReducer: { data }, voters, sprintName } = this.props;
+    const { voteReducer: { data }, voters, sprintName, storyReducer } = this.props;
+    const activeStory = (storyReducer.data && storyReducer.data.length && storyReducer.data.find(story => story.status === STORY_STATUS.ACTIVE)) || {} ;
     const stillVoting = (data && data.length < voters) || !sprintName;
 
     const messageText = stillVoting
@@ -80,15 +87,17 @@ class MasterPanel extends Component {
         <span className="master-panel__title">Scrum Master Panel</span>
         <div className="master-panel__content">
           <div className="master-panel__row-container">
-            <div className="master-panel__row">{sprintName ? `${sprintName} is active.`: 'There is no active sprint!'}</div>
+            <div className="master-panel__row">
+            { activeStory && activeStory.name ? `${activeStory.name} is active.`: 'There is no active story!' }
+            </div>
             { this.renderVoters() }
           </div>
-          { renderTxtInput() }
+            { renderTxtInput() }
           <button
             className="master-panel__button"
             onClick={ () => this.handleSubmit() }
             disabled={ stillVoting }>
-              {`End Voting For ${sprintName}`}
+              {`End Voting For ${activeStory.name}`}
           </button>
           <div className="master-panel__message">{messageText}</div>
         </div>
@@ -101,16 +110,19 @@ MasterPanel.propTypes = {
   sprintName: PropTypes.string,
   voteReducer: PropTypes.object,
   getVotes: PropTypes.func,
-  getSprint: PropTypes.func
+  getSprint: PropTypes.func,
+  finishStory: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   voteReducer: state.voteReducer,
+  storyReducer: state.storyReducer,
   voters: state.sprintReducer.data.voters,
   sprintName: state.sprintReducer.data.name
 });
 
 export default connect(mapStateToProps, {
     getVotes,
-    getSprint
+    getSprint,
+    finishStory
 })(MasterPanel);

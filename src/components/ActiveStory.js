@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const ActiveStory = ({ voteStory, stillVoting, sprintName }) => {
+const ActiveStory = ({ voteStory, stillVoting, sprintName, votes }) => {
   const [selectedVote, setSelectedVote] = useState(null);
   const [messsage, setMessage] = useState('');
+
+  useEffect(() => {
+    if (!votes.length) {
+      setSelectedVote(null);
+      setMessage('');
+    }
+  }, [votes.length]);
 
   const handleClick = (point) => {
     
@@ -52,7 +59,8 @@ const ActiveStory = ({ voteStory, stillVoting, sprintName }) => {
 ActiveStory.propTypes = {
   voteStory: PropTypes.func,
   stillVoting: PropTypes.bool,
-  sprintName: PropTypes.string
+  sprintName: PropTypes.string,
+  votes: PropTypes.array
 };
 
 export default ActiveStory;

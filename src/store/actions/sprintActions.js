@@ -6,22 +6,23 @@ import {
   CREATE_SPRINT_FAILURE,
   GET_SPRINT_REQUEST,
   GET_SPRINT_SUCCESS,
-  GET_SPRINT_FAILURE
+  GET_SPRINT_FAILURE,
+  STORY_STATUS
 } from '../constants';
 
-export const createSprint = data => async dispatch => {
+export const createSprint = (data, update = false) => async dispatch => {
   try {
     dispatch({
       type: CREATE_SPRINT_REQUEST
     });
 
-    const modifiedData = {
+    const modifiedData = update ? data : {
       name: data.name,
       voters: data.voters,
       stories: data.list.map((storyName, index) => ({
         name: storyName,
         point: '',
-        status: index === 0 ? "Active" : "Not Voted!"
+        status: index === 0 ? STORY_STATUS.ACTIVE : STORY_STATUS.NOT_VOTED
       })),
     };
 
