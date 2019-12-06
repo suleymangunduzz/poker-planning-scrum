@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import MasterPage from './MasterPage';
-import DeveloperPage from './DeveloperPage';
+import UsersPage from './UsersPage';
 import AddStoryScreen from './AddStoryScreen';
 import {
   createSprint,
@@ -38,9 +37,9 @@ class HomePageLayout extends Component {
 
     switch (pageName) {
       case MASTER:
-        return <MasterPage voteStory={voteStory} />;
+        return <UsersPage voteStory={voteStory} master />;
       case DEVELOPER:
-        return <DeveloperPage storyData={ storyReducer } voteStory={voteStory} />;
+        return <UsersPage storyData={ storyReducer } voteStory={voteStory} />;
       case HOME:
         return <AddStoryScreen createSprint={ createSprint } history={ history } />;
       default:
@@ -67,7 +66,9 @@ class HomePageLayout extends Component {
           <div className="home-page__logo">Scrum Poker</div>
           { this.renderUrlArea() }
         </div>
-        { this.renderContent() }
+        <div className="home-page__content">
+          { this.renderContent() }
+        </div>
       </div>
     );
   }

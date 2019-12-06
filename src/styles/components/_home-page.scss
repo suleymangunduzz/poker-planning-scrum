@@ -9,6 +9,10 @@
     margin-bottom: 25px;
   }
 
+  &__content {
+    display: flex;
+  }
+
   &__link {
     text-decoration: unset;
     color: black;

@@ -69,7 +69,7 @@ class MasterPanel extends Component {
     const renderTxtInput = () => {
       return !stillVoting && showFinalInput ? (
         <div className="master-panel__finalize">
-          <label>Final Score</label>
+          <label className="master-panel__label">Final Score</label>
             <input type="number" value={ finalScore } id="finalScore" onChange={ (e) => this.handleChange(e) } />
         </div>
       ) : null;

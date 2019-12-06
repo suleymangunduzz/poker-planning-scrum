@@ -5,18 +5,19 @@ import StoryList from './StoryList';
 import ActiveStory from './ActiveStory';
 import MasterPanel from './MasterPanel';
 
-const MasterPage = ({ voteStory }) => {
+const UsersPage = ({ voteStory, master }) => {
   return (
-    <div className="master__content">
+    <>
       <StoryList />
       <ActiveStory voteStory={ voteStory }/>
-      <MasterPanel />
-    </div>
+      { master ? <MasterPanel /> : null }
+    </>
   );
 }
 
-MasterPage.propTypes = {
-  voteStory: PropTypes.func
+UsersPage.propTypes = {
+  voteStory: PropTypes.func,
+  master: PropTypes.bool
 };
 
-export default MasterPage;
+export default UsersPage;
