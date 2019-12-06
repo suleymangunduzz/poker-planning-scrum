@@ -9,9 +9,35 @@ import {
 
 class MasterPanel extends Component {
 
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      finalScore: '',
+      showFinalInput: false
+    };
+  }
+
   componentDidMount () {
     this.props.getVotes();
     this.props.getSprint();
+  }
+
+  handleChange = (event) => {
+    const { id, value } = event.target;
+
+    this.setState({
+      [id]: value
+    });
+  }
+
+  handleSubmit = () => {
+
+    // TODO: finalize the score of active story
+
+    this.setState({
+      showFinalInput: true
+    })
   }
 
   renderVoters = () => {
@@ -32,26 +58,36 @@ class MasterPanel extends Component {
   };
 
   render () {
+    const { finalScore, showFinalInput } = this.state;
     const { voteReducer: { data }, voters, sprintName } = this.props;
-    const stillVoting = data && data.length < voters;
+    const stillVoting = (data && data.length < voters) || !sprintName;
 
     const messageText = stillVoting
       ? 'You can not end voting till each teammate voted.'
       : 'Please discuss and finalize the score !';
+
+    const renderTxtInput = () => {
+      return !stillVoting && showFinalInput ? (
+        <div className="master-panel__finalize">
+          <label>Final Score</label>
+            <input type="number" value={ finalScore } id="finalScore" onChange={ (e) => this.handleChange(e) } />
+        </div>
+      ) : null;
+    };
 
     return (
       <div className="master-panel">
         <span className="master-panel__title">Scrum Master Panel</span>
         <div className="master-panel__content">
           <div className="master-panel__row-container">
-            <div className="master-panel__row">{`${sprintName} is active.`}</div>
+            <div className="master-panel__row">{sprintName ? `${sprintName} is active.`: 'There is no active sprint!'}</div>
             { this.renderVoters() }
           </div>
+          { renderTxtInput() }
           <button
             className="master-panel__button"
-            onClick={ () => console.log('object') }
-            disabled={ stillVoting }
-            >
+            onClick={ () => this.handleSubmit() }
+            disabled={ stillVoting }>
               {`End Voting For ${sprintName}`}
           </button>
           <div className="master-panel__message">{messageText}</div>

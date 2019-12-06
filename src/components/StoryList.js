@@ -21,7 +21,7 @@ class StoryList extends Component {
     const { storyReducer: { data } } = this.props;
 
     const renderStories = () => {
-      return data.length && data.map((story, index) => {
+      return data && data.length && data.map((story, index) => {
         return (
           <div key={ index } className="story-list__row">
             <div className="story-list__row-title">{ story.name }</div>
