@@ -17,7 +17,7 @@ import {
 
 class HomePageLayout extends Component {
   renderUrlArea = () => {
-    const { match: { params: { pageName }} } = this.props;
+    const { match: { params: { pageName } } } = this.props;
 
     return pageName === MASTER
       ? <div className="home-page__logo home-page__logo--url">
@@ -28,18 +28,20 @@ class HomePageLayout extends Component {
 
   renderContent = () => {
     const {
-      storyReducer,
+      voteReducer: { data }, voters, sprintName,
       match: { params: { pageName } },
       createSprint,
       history,
       voteStory
     } = this.props;
 
+    const stillVoting = (data && data.length < voters) || !sprintName;
+
     switch (pageName) {
       case MASTER:
-        return <UsersPage voteStory={voteStory} master />;
+        return <UsersPage voteStory={ voteStory } stillVoting={ stillVoting }  sprintName={ sprintName } master />;
       case DEVELOPER:
-        return <UsersPage storyData={ storyReducer } voteStory={voteStory} />;
+        return <UsersPage voteStory={ voteStory } stillVoting={ stillVoting } sprintName={ sprintName }/>;
       case HOME:
         return <AddStoryScreen createSprint={ createSprint } history={ history } />;
       default:
@@ -76,11 +78,16 @@ class HomePageLayout extends Component {
 
 HomePageLayout.propTypes = {
   createSprint: PropTypes.func,
-  voteStory: PropTypes.func
+  voteStory: PropTypes.func,
+  sprintName: PropTypes.string,
+  voters: PropTypes.number,
+  voteReducer: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  storyReducer: state.storyReducer
+  voteReducer: state.voteReducer,
+  voters: state.sprintReducer.data.voters,
+  sprintName: state.sprintReducer.data.name
 });
 
 export default connect(mapStateToProps, {

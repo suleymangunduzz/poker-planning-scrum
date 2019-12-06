@@ -5,11 +5,11 @@ import StoryList from './StoryList';
 import ActiveStory from './ActiveStory';
 import MasterPanel from './MasterPanel';
 
-const UsersPage = ({ voteStory, master }) => {
+const UsersPage = ({ voteStory, master, stillVoting, sprintName }) => {
   return (
     <>
       <StoryList />
-      <ActiveStory voteStory={ voteStory }/>
+      <ActiveStory voteStory={ voteStory } stillVoting={ stillVoting } sprintName={ sprintName }/>
       { master ? <MasterPanel /> : null }
     </>
   );
@@ -17,7 +17,9 @@ const UsersPage = ({ voteStory, master }) => {
 
 UsersPage.propTypes = {
   voteStory: PropTypes.func,
-  master: PropTypes.bool
+  master: PropTypes.bool,
+  stillVoting: PropTypes.bool,
+  sprintName: PropTypes.string
 };
 
 export default UsersPage;

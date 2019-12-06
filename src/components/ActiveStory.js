@@ -2,15 +2,22 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-const ActiveStory = ({ voteStory }) => {
+const ActiveStory = ({ voteStory, stillVoting, sprintName }) => {
   const [selectedVote, setSelectedVote] = useState(null);
   const [messsage, setMessage] = useState('');
 
   const handleClick = (point) => {
-    if (point !== '?' && !selectedVote) {
-      setSelectedVote(point);
-      voteStory(point);
-      setMessage(point + ' Voted');
+    
+    if (!sprintName) {
+      setMessage('There is no active sprint yet !')
+    } else {
+      if (point !== '?' && !selectedVote && stillVoting) {
+        setSelectedVote(point);
+        voteStory(point);
+        setMessage(point + ' Voted');
+      } else if (!stillVoting) {
+        setMessage('Everone already voted, just hold on to see the results !');
+      }
     }
   };
 
@@ -43,7 +50,9 @@ const ActiveStory = ({ voteStory }) => {
 };
 
 ActiveStory.propTypes = {
-  voteStory: PropTypes.func
+  voteStory: PropTypes.func,
+  stillVoting: PropTypes.bool,
+  sprintName: PropTypes.string
 };
 
 export default ActiveStory;
